@@ -9,8 +9,8 @@ export class Image {
   @Column()
   alternativeText!: string;
 
-  @PrimaryGeneratedColumn()
-  id!: number;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
 
   @OneToOne(() => Article, (article) => article.image)
   article!: Article;
