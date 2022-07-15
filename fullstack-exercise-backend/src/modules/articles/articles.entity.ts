@@ -27,7 +27,7 @@ export class Article {
   @CreateDateColumn()
   createdAt!: Date;
 
-  @OneToMany(() => Comment, (comment) => comment.article)
+  @OneToMany(() => Comment, (comment) => comment.article, { cascade: true })
   comments!: Comment[];
 
   @OneToOne(() => Image, (image) => image.article)

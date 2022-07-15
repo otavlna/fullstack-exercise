@@ -3,13 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Article } from './modules/articles/articles.entity';
 import { ArticlesModule } from './modules/articles/articles.module';
-import { Comment } from './modules/comments/comments.entity';
 import { CommentsModule } from './modules/comments/comments.module';
-import { Image } from './modules/images/images.entity';
 import { ImagesModule } from './modules/images/images.module';
-import { Vote } from './modules/votes/votes.entity';
 import { VotesModule } from './modules/votes/votes.module';
 
 @Module({
@@ -30,8 +26,6 @@ import { VotesModule } from './modules/votes/votes.module';
       }),
       inject: [ConfigService],
     }),
-
-    TypeOrmModule.forFeature([Article, Comment, Image, Vote]),
 
     ArticlesModule,
 
