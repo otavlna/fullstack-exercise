@@ -1,4 +1,4 @@
-import { IsOptional, IsUUID, Length } from 'class-validator';
+import { IsOptional, Length } from 'class-validator';
 
 export class CreateArticleDto {
   @Length(10, 60)
@@ -10,9 +10,8 @@ export class CreateArticleDto {
   @Length(10, 5000)
   content!: string;
 
-  @IsUUID()
-  @IsOptional()
-  imageId?: string;
+  @Length(40, 41)
+  fileName!: string;
 }
 
 export class UpdateArticleDto {
@@ -28,7 +27,7 @@ export class UpdateArticleDto {
   @Length(10, 5000)
   content!: string;
 
-  @IsUUID()
   @IsOptional()
-  imageId?: string;
+  @Length(40, 41)
+  fileName!: string;
 }

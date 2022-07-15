@@ -4,11 +4,8 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   OneToMany,
-  OneToOne,
-  JoinColumn,
 } from 'typeorm';
 import { Comment } from '../comments/comments.entity';
-import { Image } from '../images/images.entity';
 
 @Entity()
 export class Article {
@@ -21,6 +18,9 @@ export class Article {
   @Column()
   content!: string;
 
+  @Column()
+  imageName!: string;
+
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -29,8 +29,4 @@ export class Article {
 
   @OneToMany(() => Comment, (comment) => comment.article, { cascade: true })
   comments!: Comment[];
-
-  @OneToOne(() => Image, (image) => image.article)
-  @JoinColumn()
-  image?: Image;
 }
