@@ -33,20 +33,20 @@
   - document the API - REST in Swagger, GraphQL with documentation comments in schema
   - write Swagger yourself or generate it, you can expose it as an endpoint
   - for GraphQL, expose GraphiQL or GraphQL Playground
-- dockerize your app
-  - create a Dockerfile for your app
-  - create a docker-compose file that can be used to run your app with all dependencies
+- ~~dockerize your app~~
+  - ~~create a Dockerfile for your app~~
+  - ~~create a docker-compose file that can be used to run your app with all dependencies~~
 - implement login
   - the user should just need a password to login
   - seed the database with user data
-- create simple CRUD for blog posts (articles)
-  - each article should have title, perex and content
-  - each article should also have a unique generated id
-  - each article should also have a timestamp
-- add the possibility to add comments to articles
-  - a comment should have an author (just a string) and content
-  - each comment should also have a timestamp
-  - comments are flat, with relation only to article
+- ~~create simple CRUD for blog posts (articles)~~
+  - ~~each article should have title, perex and content~~
+  - ~~each article should also have a unique generated id~~
+  - ~~each article should also have a timestamp~~
+- ~~add the possibility to add comments to articles~~
+  - ~~a comment should have an author (just a string) and content~~
+  - ~~each comment should also have a timestamp~~
+  - ~~comments are flat, with relation only to article~~
     - nested comments are for bonus points
 - add the possibility to vote on comments (Reddit-style + and -)
   - votes should identified by IP address and unique
