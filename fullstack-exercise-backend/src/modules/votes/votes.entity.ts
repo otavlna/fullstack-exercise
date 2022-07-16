@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Comment } from '../comments/comments.entity';
 
 export enum VoteTypes {
@@ -8,7 +14,7 @@ export enum VoteTypes {
 
 @Entity()
 export class Vote {
-  @Column({ unique: true })
+  @Column()
   ip!: string;
 
   @Column({
@@ -22,5 +28,6 @@ export class Vote {
   id!: number;
 
   @ManyToOne(() => Comment, (comment) => comment.votes)
+  @JoinColumn()
   comment!: Comment;
 }
