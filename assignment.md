@@ -48,9 +48,9 @@
   - ~~each comment should also have a timestamp~~
   - ~~comments are flat, with relation only to article~~
     - nested comments are for bonus points
-- add the possibility to vote on comments (Reddit-style + and -)
-  - votes should identified by IP address and unique
-- add the option to make commenting and voting realtime
+- ~~add the possibility to vote on comments (Reddit-style + and -)~~
+  - ~~votes should identified by IP address and unique~~
+- add the option to make commenting ~~and voting~~ realtime
   - via GraphQL Subscriptions or WebSockets
 - present your ability to test the code
   - You don't have to test everything, add at least some unit tests
