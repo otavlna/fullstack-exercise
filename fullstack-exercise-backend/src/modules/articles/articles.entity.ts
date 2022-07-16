@@ -19,7 +19,7 @@ export class Article {
   content!: string;
 
   @Column()
-  imageName!: string;
+  fileName!: string;
 
   @PrimaryGeneratedColumn()
   id!: number;
