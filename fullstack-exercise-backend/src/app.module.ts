@@ -5,6 +5,8 @@ import { ArticlesModule } from './modules/articles/articles.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { ImagesModule } from './modules/images/images.module';
 import { VotesModule } from './modules/votes/votes.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -32,6 +34,10 @@ import { VotesModule } from './modules/votes/votes.module';
     ImagesModule,
 
     VotesModule,
+
+    AuthModule,
+
+    UsersModule,
   ],
 })
 export class AppModule {}

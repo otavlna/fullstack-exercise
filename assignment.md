@@ -36,8 +36,8 @@
 - ~~dockerize your app~~
   - ~~create a Dockerfile for your app~~
   - ~~create a docker-compose file that can be used to run your app with all dependencies~~
-- implement login
-  - the user should just need a password to login
+- ~~implement login~~
+  - ~~the user should just need a password to login~~
   - seed the database with user data
 - ~~create simple CRUD for blog posts (articles)~~
   - ~~each article should have title, perex and content~~
