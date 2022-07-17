@@ -28,10 +28,10 @@
 
 ## The Exercise
 
-- design the API yourself and document it
-  - ideally, create both REST and GraphQL
-  - document the API - REST in Swagger, GraphQL with documentation comments in schema
-  - write Swagger yourself or generate it, you can expose it as an endpoint
+- ~~design the API yourself and document it~~
+  - ~~ideally, create both REST~~ and GraphQL
+  - ~~document the API - REST in Swagger~~, GraphQL with documentation comments in schema
+  - ~~write Swagger yourself or generate it, you can expose it as an endpoint~~
   - for GraphQL, expose GraphiQL or GraphQL Playground
 - ~~dockerize your app~~
   - ~~create a Dockerfile for your app~~

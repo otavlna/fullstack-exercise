@@ -1,4 +1,6 @@
+import { OmitType } from '@nestjs/swagger';
 import { IsOptional, Length } from 'class-validator';
+import { Article } from './articles.entity';
 
 export class CreateArticleDto {
   @Length(10, 60)
@@ -31,3 +33,8 @@ export class UpdateArticleDto {
   @Length(40, 41)
   fileName!: string;
 }
+
+export class ArticleApiResShort extends OmitType(Article, [
+  'comments',
+  'user',
+] as const) {}

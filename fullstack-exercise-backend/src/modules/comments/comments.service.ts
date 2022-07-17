@@ -17,7 +17,7 @@ export class CommentsService {
   async create(
     commentInput: CreateCommentDto,
     articleId: number,
-  ): Promise<Article> {
+  ): Promise<Comment> {
     const article: Article | null = await this.articleRepository.findOne({
       where: {
         id: articleId,
@@ -35,6 +35,8 @@ export class CommentsService {
 
     article.comments.push(comment);
 
-    return await this.articleRepository.save(article);
+    await this.articleRepository.save(article);
+
+    return comment;
   }
 }

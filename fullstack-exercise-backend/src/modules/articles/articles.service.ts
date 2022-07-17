@@ -12,6 +12,7 @@ import { Article } from './articles.entity';
 import { Request } from 'express';
 import { UserFromRequestDto } from '../users/users.dto';
 import { REQUEST } from '@nestjs/core';
+import { ArticlesErrorDescriptions } from './articles.errorDescriptions';
 
 @Injectable({ scope: Scope.REQUEST })
 export class ArticlesService {
@@ -28,7 +29,7 @@ export class ArticlesService {
     });
   }
 
-  async findOne(id: number): Promise<Article | null> {
+  async findOne(id: number): Promise<Article> {
     const article: Article | null = await this.articlesRepository.findOne({
       where: { id: id },
       relations: { comments: true, user: true },
@@ -36,7 +37,7 @@ export class ArticlesService {
     if (article !== null) {
       return article;
     } else {
-      throw new NotFoundException('Article with specified ID not found');
+      throw new NotFoundException(ArticlesErrorDescriptions.NotFound);
     }
   }
 
@@ -58,10 +59,12 @@ export class ArticlesService {
       where: { id },
     });
     if (article === null) {
-      throw new NotFoundException('Article with specified ID not found');
+      throw new NotFoundException(ArticlesErrorDescriptions.NotFound);
     }
     if (article.userId !== this.request.user.id) {
-      throw new UnauthorizedException("You can not edit other user's articles");
+      throw new UnauthorizedException(
+        ArticlesErrorDescriptions.UnauthorizedEdit,
+      );
     }
 
     await this.articlesRepository.update({ id }, articleInput);
@@ -73,11 +76,11 @@ export class ArticlesService {
       where: { id },
     });
     if (article === null) {
-      throw new NotFoundException('Article with specified ID not found');
+      throw new NotFoundException(ArticlesErrorDescriptions.NotFound);
     }
     if (article.userId !== this.request.user.id) {
       throw new UnauthorizedException(
-        "You can not delete other user's articles",
+        ArticlesErrorDescriptions.UnauthorizedDelete,
       );
     }
     return await this.articlesRepository.remove(article);

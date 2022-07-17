@@ -1,3 +1,4 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import {
   Entity,
   Column,
@@ -23,9 +24,11 @@ export class Comment {
   @CreateDateColumn()
   createdAt!: Date;
 
+  @ApiHideProperty()
   @ManyToOne(() => Article, (article) => article.comments)
   article!: Article;
 
+  @ApiHideProperty()
   @OneToMany(() => Vote, (vote) => vote.comment)
   votes!: VoteTypes[];
 }
