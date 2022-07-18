@@ -8,9 +8,12 @@ import { VotesModule } from './modules/votes/votes.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 
+const ENV = process.env.NODE_ENV;
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: [!!ENV ? `.${ENV}.env` : '.development.env'],
+    }),
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

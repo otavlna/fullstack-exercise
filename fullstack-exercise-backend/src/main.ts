@@ -7,6 +7,8 @@ import { cwd } from 'process';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
+  console.log(`Running in ${process.env.NODE_ENV} mode`);
+
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.useGlobalPipes(
