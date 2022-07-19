@@ -1,6 +1,6 @@
 # Applifting Blog Engine fullstack exercise (WIP)
 
-This monorepo contains two main directories - the app's [frontend](https://github.com/otavlna/tree/master/fullstack-exercise/fullstack-exercise-frontend) and [backend](https://github.com/otavlna/tree/master/fullstack-exercise/fullstack-exercise-backend).
+This monorepo contains two main directories - the app's [frontend](https://github.com/otavlna/fullstack-exercise/tree/master/fullstack-exercise-frontend) and [backend](https://github.com/otavlna/fullstack-exercise/tree/master/fullstack-exercise-backend).
 
 You can find more info in respective directories.
 
