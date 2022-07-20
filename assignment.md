@@ -50,8 +50,8 @@
     - nested comments are for bonus points
 - ~~add the possibility to vote on comments (Reddit-style + and -)~~
   - ~~votes should identified by IP address and unique~~
-- add the option to make commenting ~~and voting~~ realtime
-  - via GraphQL Subscriptions or WebSockets
+- ~~add the option to make~~ commenting and ~~voting realtime~~
+  - ~~via GraphQL Subscriptions or WebSockets~~
 - ~~present your ability to test the code~~
   - ~~You don't have to test everything, add at least some unit tests~~
   - ~~Optionally also include some integration and e2e tests~~
