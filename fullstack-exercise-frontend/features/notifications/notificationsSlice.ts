@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Notification } from "./notificationsTypes";
-import { v4 as uuid } from "uuid"; //nanoid
+import { nanoid } from "@reduxjs/toolkit";
 
 interface NotificationsState {
   notifications: Notification[];
@@ -34,7 +34,7 @@ export function createNotification(content: string, statusCode: number) {
     content: content,
     statusCode: statusCode,
     show: true,
-    id: uuid(),
+    id: nanoid(),
   };
 
   return notification;
