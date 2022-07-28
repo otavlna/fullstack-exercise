@@ -8,7 +8,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Article } from '../articles/articles.entity';
-import { Vote, VoteTypes } from '../votes/votes.entity';
+import { Vote } from '../votes/votes.entity';
 
 @Entity()
 export class Comment {
@@ -30,5 +30,5 @@ export class Comment {
 
   @ApiHideProperty()
   @OneToMany(() => Vote, (vote) => vote.comment)
-  votes!: VoteTypes[];
+  votes!: Vote[];
 }
