@@ -1,3 +1,5 @@
+import { ApiHideProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 import {
   Entity,
   Column,
@@ -14,6 +16,8 @@ export enum VoteTypes {
 
 @Entity()
 export class Vote {
+  @ApiHideProperty()
+  @Exclude()
   @Column()
   ip!: string;
 
