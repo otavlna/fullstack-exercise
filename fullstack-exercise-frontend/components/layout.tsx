@@ -3,6 +3,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { Nav } from "react-bootstrap";
 import { LogIn, LogOut } from "react-feather";
+import Image from "next/image";
+import Notifications from "../features/notifications/notifications";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -13,17 +15,18 @@ const loggedIn = false;
 const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
   return (
     <>
-      <Navbar bg="light" expand="lg" className="mb-5">
+      <Notifications />
+      <Navbar bg="light" expand="lg" className="mb-4 py-1">
         <Container>
           <Navbar.Brand href="/">
-            <img src="/logo.png" width="39" height="44" alt="Blog logo" />
+            <Image src="/logo.png" width="39" height="44" alt="Blog logo" />
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Recent Articles</Nav.Link>
           </Nav>
 
           <Nav>
-            {loggedIn ? (
+            {!loggedIn ? (
               <Nav.Link className="text-primary" href="/admin/login">
                 Login
                 <LogIn size={20} />
