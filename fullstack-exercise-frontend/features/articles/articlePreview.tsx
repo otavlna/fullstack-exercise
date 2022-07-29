@@ -22,7 +22,7 @@ const ArticlePreview: FunctionComponent<ArticlePreviewProps> = ({ article }) => 
       <div className="ms-3">
         <h4>{article.title}</h4>
         <div>
-          <small className="text-secondary">author</small>
+          <small className="text-secondary">{article.user.username}</small>
           <span className="mx-2 text-secondary">•</span>
           <small className="text-secondary ">{formatDate(article.createdAt)}</small>
           <p className="mt-2">{article.perex}</p>
@@ -32,7 +32,7 @@ const ArticlePreview: FunctionComponent<ArticlePreviewProps> = ({ article }) => 
                 <small>Read whole article</small>
               </a>
             </Link>
-            <small className="ms-2 text-secondary">0 comments</small>
+            <small className="ms-2 text-secondary">{article.comments} comments</small>
           </div>
         </div>
       </div>

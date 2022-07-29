@@ -9,6 +9,12 @@ export type ArticleShort = {
   id: number;
   createdAt: string;
   userId: number;
+  comments: number;
+  user: User;
+};
+
+export type ArticlesShortRes = {
+  articles: ArticleShort[];
 };
 
 export type Article = {

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../common/axios";
 import { Status } from "../../types/status";
-import { ArticleShort } from "./articleTypes";
+import { ArticleShort, ArticlesShortRes } from "./articleTypes";
 
 type ArticlesState = {
   articles: ArticleShort[];
@@ -14,7 +14,7 @@ const initialState: ArticlesState = {
 };
 
 export const fetchArticles = createAsyncThunk("articles/fetchArticles", async () => {
-  const response = await axios.get<ArticleShort[]>("/articles");
+  const response = await axios.get<ArticlesShortRes>("/articles");
   return response.data;
 });
 
@@ -29,7 +29,7 @@ export const articlesSlice = createSlice({
       })
       .addCase(fetchArticles.fulfilled, (state, action) => {
         state.status = Status.Success;
-        state.articles = action.payload;
+        state.articles = action.payload.articles;
       })
       .addCase(fetchArticles.rejected, (state, action) => {
         state.status = Status.Fail;
