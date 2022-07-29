@@ -29,7 +29,7 @@ const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
             {!loggedIn ? (
               <Nav.Link className="text-primary" href="/admin/login">
                 Login
-                <LogIn size={20} />
+                <LogIn className="ms-1" size={20} />
               </Nav.Link>
             ) : (
               <>
@@ -39,7 +39,7 @@ const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
                 </Nav.Link>
                 <Nav.Link href="/admin/logout">
                   Logout
-                  <LogOut size={20} />
+                  <LogOut className="ms-1" size={20} />
                 </Nav.Link>
               </>
             )}
