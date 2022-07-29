@@ -33,7 +33,7 @@ export class ArticlesController {
   }
 
   @Get()
-  @ApiResponse({ status: 200, type: [ArticleApiResShort] })
+  @ApiResponse({ status: 200, type: ArticlesShortRes })
   findAll(): Promise<ArticlesShortRes | null> {
     return this.articlesService.findAll();
   }
