@@ -1,7 +1,10 @@
 import Image from "next/image";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { formatDate } from "../../common/formatDate";
 import { Article } from "./articleTypes";
+import ReactMarkdown from "react-markdown";
+import Comments from "./comments";
+import ArticleDetailAside from "./articleDetailAside";
 
 interface ArticleDetailProps {
   article: Article;
@@ -9,13 +12,15 @@ interface ArticleDetailProps {
 
 const ArticleDetail: FunctionComponent<ArticleDetailProps> = ({ article }) => {
   return (
-    <main className="row g-5">
+    <main className="row g-4">
       <article className="col-8">
         <h1>{article.title}</h1>
         <div>
           <small className="text-secondary">{article.user.username}</small>
-          <small className="text-secondary ms-2">{formatDate(article.createdAt)}</small>
+          <span className="mx-2 text-secondary">•</span>
+          <small className="text-secondary">{formatDate(article.createdAt)}</small>
         </div>
+        <ReactMarkdown className="mt-2 mb-1">{article.perex}</ReactMarkdown>
         <div className="image-detail-container mt-3">
           <Image
             layout="fill"
@@ -24,8 +29,11 @@ const ArticleDetail: FunctionComponent<ArticleDetailProps> = ({ article }) => {
             alt="Article image"
           ></Image>
         </div>
+        <ReactMarkdown className="mt-3">{article.content}</ReactMarkdown>
+        <hr />
+        <Comments article={article} />
       </article>
-      <aside className="col-4">test</aside>
+      <ArticleDetailAside />
     </main>
   );
 };
