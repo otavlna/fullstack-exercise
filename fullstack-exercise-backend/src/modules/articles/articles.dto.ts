@@ -1,6 +1,7 @@
-import { OmitType } from '@nestjs/swagger';
+import { Transform, Type } from 'class-transformer';
 import { IsOptional, Length } from 'class-validator';
 import { Article } from './articles.entity';
+import { Comment } from '../comments/comments.entity';
 
 export class CreateArticleDto {
   @Length(10, 60)
@@ -34,7 +35,16 @@ export class UpdateArticleDto {
   fileName!: string;
 }
 
-export class ArticleApiResShort extends OmitType(Article, [
-  'comments',
-  'user',
-] as const) {}
+export class ArticlesShortRes {
+  @Type(() => ArticleApiResShort)
+  articles!: ArticleApiResShort[];
+
+  constructor(partial: Partial<ArticlesShortRes>) {
+    Object.assign(this, partial);
+  }
+}
+
+export class ArticleApiResShort extends Article {
+  @Transform(({ value }) => value.length)
+  comments!: Comment[];
+}

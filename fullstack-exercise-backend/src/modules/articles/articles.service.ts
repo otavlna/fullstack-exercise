@@ -7,7 +7,11 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateArticleDto, UpdateArticleDto } from './articles.dto';
+import {
+  ArticlesShortRes,
+  CreateArticleDto,
+  UpdateArticleDto,
+} from './articles.dto';
 import { Article } from './articles.entity';
 import { Request } from 'express';
 import { UserFromRequestDto } from '../users/users.dto';
@@ -41,8 +45,14 @@ export class ArticlesService {
     }
   }
 
-  async findAll(): Promise<Article[] | null> {
-    return await this.articlesRepository.find();
+  async findAll(): Promise<ArticlesShortRes | null> {
+    const articles = await this.articlesRepository.find({
+      relations: { comments: true, user: true },
+    });
+
+    return new ArticlesShortRes({
+      articles: articles,
+    });
   }
 
   async findUsersArticles(): Promise<Article[] | null> {

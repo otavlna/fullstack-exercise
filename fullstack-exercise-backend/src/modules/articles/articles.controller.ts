@@ -1,6 +1,5 @@
 import {
   Body,
-  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -8,12 +7,12 @@ import {
   Patch,
   Post,
   UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import {
   ArticleApiResShort,
+  ArticlesShortRes,
   CreateArticleDto,
   UpdateArticleDto,
 } from './articles.dto';
@@ -35,14 +34,13 @@ export class ArticlesController {
 
   @Get()
   @ApiResponse({ status: 200, type: [ArticleApiResShort] })
-  findAll(): Promise<Article[] | null> {
+  findAll(): Promise<ArticlesShortRes | null> {
     return this.articlesService.findAll();
   }
 
   @Get(':id')
   @ApiResponse({ status: 200, type: Article })
   @ApiResponse({ status: 404, description: ArticlesErrorDescriptions.NotFound })
-  @UseInterceptors(ClassSerializerInterceptor)
   findOne(@Param('id') id: number) {
     return this.articlesService.findOne(id);
   }
