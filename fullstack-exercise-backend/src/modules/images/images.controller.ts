@@ -24,7 +24,6 @@ export class ImagesController {
     description: 'Image upload endpoint',
     type: FileUploadDto,
   })
-  @UseInterceptors()
   @UseInterceptors(FileInterceptor('file', options))
   async uploadFile(
     @UploadedFile()
