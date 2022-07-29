@@ -10,7 +10,7 @@ type ArticlePreviewProps = {
 
 const ArticlePreview: FunctionComponent<ArticlePreviewProps> = ({ article }) => {
   return (
-    <article className="d-flex flex-direction-row">
+    <article className="d-flex flex-direction-row mb-3">
       <div className="image-preview-container">
         <Image
           layout="fill"
@@ -22,7 +22,8 @@ const ArticlePreview: FunctionComponent<ArticlePreviewProps> = ({ article }) => 
       <div className="ms-3">
         <h4>{article.title}</h4>
         <div>
-          <small className="me-4 text-secondary">author</small>
+          <small className="text-secondary">author</small>
+          <span className="mx-2 text-secondary">•</span>
           <small className="text-secondary ">{formatDate(article.createdAt)}</small>
           <p className="mt-2">{article.perex}</p>
           <div className="ms-1">
