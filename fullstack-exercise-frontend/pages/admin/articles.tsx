@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
-import { Edit, Edit2, Trash } from "react-feather";
+import { Edit2, Trash } from "react-feather";
 import { fetchArticles } from "../../features/articles/articlesSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
