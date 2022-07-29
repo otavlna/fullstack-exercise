@@ -3,15 +3,10 @@ export type Comment = {
   content: string;
   id: number;
   createdAt: string;
-  votes: VoteTypes[];
+  votes: number
 };
 
 export enum VoteTypes {
   Upvote = "UPVOTE",
   Downvote = "DOWNVOTE",
 }
-
-export type Vote = {
-  type: VoteTypes;
-  id: number;
-};
