@@ -14,7 +14,7 @@ const ArticlesPage: FunctionComponent = () => {
   return (
     <main>
       <h1> Recent Articles</h1>
-      <div>
+      <div className="mt-4">
         {articles.map((article) => (
           <ArticlePreview article={article} key={article.id} />
         ))}
