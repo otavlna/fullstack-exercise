@@ -8,8 +8,10 @@ const ArticleDetailAside: FunctionComponent = () => {
   const articles = useAppSelector((state) => state.articles.articles);
 
   useEffect(() => {
-    dispatch(fetchArticles());
-  }, [dispatch]);
+    if (articles.length === 0) {
+      dispatch(fetchArticles());
+    }
+  }, [dispatch, articles]);
 
   return (
     <aside className="col-4">
