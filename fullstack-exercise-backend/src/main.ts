@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { join } from 'path';
 import { cwd } from 'process';
+import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -24,6 +25,8 @@ async function bootstrap() {
     join(cwd(), process.env.UPLOADED_FILES_DEST ?? 'uploads'),
   );
 
+  app.use(cookieParser());
+
   const config = new DocumentBuilder()
     .setTitle('Fullstack-exercise')
     .setDescription('The fullstack-exercise API description')
@@ -33,7 +36,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  app.enableCors({ origin: ['http://localhost:3000'] });
+  app.enableCors({ origin: ['http://localhost:3000'], credentials: true });
 
   await app.listen(1337);
 }

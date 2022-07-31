@@ -1,9 +1,9 @@
-import { Controller, Req, Post, UseGuards } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Req, Post, UseGuards, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { LocalAuthGuard } from './local-auth.guard';
 import { AuthService } from './auth.service';
 import { ApiBody } from '@nestjs/swagger';
-import { LoginResponseDto, ValidateUserDto } from './auth.dto';
+import { ValidateUserDto } from './auth.dto';
 
 @Controller()
 export class AuthController {
@@ -15,7 +15,21 @@ export class AuthController {
     description: 'Login endpoint',
     type: ValidateUserDto,
   })
-  async login(@Req() req: Request): Promise<LoginResponseDto> {
-    return this.authService.login(req.user);
+  async login(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    const loginResponse = await this.authService.login(req.user);
+    res.cookie('access-token', loginResponse.access_token, {
+      httpOnly: true,
+      secure: true,
+    });
+    res.cookie('logged-in', true);
+  }
+
+  @Post('auth/logout')
+  @ApiBody({
+    description: 'Logout endpoint',
+  })
+  async logout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('access-token', { httpOnly: true, secure: true });
+    res.clearCookie('logged-in');
   }
 }
