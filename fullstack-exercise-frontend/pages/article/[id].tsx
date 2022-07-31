@@ -9,8 +9,7 @@ import ArticleDetail from "../../features/articles/articleDetail";
 const ArticlePage: FunctionComponent = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const article = useAppSelector((state) => state.articles.article);
-  const articleStatus = useAppSelector((state) => state.articles.status);
+  const { article, status: articleStatus } = useAppSelector((state) => state.articles);
 
   const articleId = typeof router.query.id === "string" ? parseInt(router.query.id) : -1;
 
