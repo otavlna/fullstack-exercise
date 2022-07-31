@@ -1,17 +1,35 @@
-import { FunctionComponent } from "react";
+import { useRouter } from "next/router";
+import { FunctionComponent, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { login } from "../../features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { Status } from "../../types/status";
 
-type Inputs = {
+export type LoginInputs = {
   username: string;
   password: string;
 };
 
 const Login: FunctionComponent = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+  const router = useRouter();
+  const loggedIn = useAppSelector((state) => state.auth.loggedIn);
+  const dispatch = useAppDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<LoginInputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    
+  const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
+    dispatch(login(data));
   };
+
+  useEffect(() => {
+    if (loggedIn) {
+      router.push("/articles");
+    }
+  }, [loggedIn, router]);
 
   return (
     <div className="shadow p-4 mx-auto" style={{ width: "368px" }}>
@@ -32,6 +50,7 @@ const Login: FunctionComponent = () => {
         </label>
         <input
           id="password"
+          type="password"
           className="w-100 p-1 border rounded"
           {...register("password", { required: true })}
           placeholder="********"
