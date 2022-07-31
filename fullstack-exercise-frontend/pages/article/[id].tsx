@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect } from "react";
-import { fetchArticle } from "../../features/articles/articleSlice";
+import { fetchArticle } from "../../features/articles/articlesSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useRouter } from "next/router";
 import { Status } from "../../types/status";
@@ -9,8 +9,8 @@ import ArticleDetail from "../../features/articles/articleDetail";
 const ArticlePage: FunctionComponent = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const article = useAppSelector((state) => state.article.article);
-  const articleStatus = useAppSelector((state) => state.article.status);
+  const article = useAppSelector((state) => state.articles.article);
+  const articleStatus = useAppSelector((state) => state.articles.status);
 
   const articleId = typeof router.query.id === "string" ? parseInt(router.query.id) : -1;
 
