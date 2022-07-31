@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "../../common/axios";
 import { Status } from "../../types/status";
 
@@ -20,7 +20,11 @@ export const fetchFileUpload = createAsyncThunk("fileUpload/fileUpload", async (
 export const fileUploadSlice = createSlice({
   name: "fileUpload",
   initialState,
-  reducers: {},
+  reducers: {
+    setFileName: (state, action: PayloadAction<string>) => {
+      state.fileName = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchFileUpload.pending, (state, action) => {
@@ -36,6 +40,6 @@ export const fileUploadSlice = createSlice({
   },
 });
 
-// export const {} = fileUploadSlice.actions;
+export const { setFileName } = fileUploadSlice.actions;
 
 export default fileUploadSlice.reducer;

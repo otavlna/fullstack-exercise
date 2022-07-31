@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../common/axios";
-import { ArticleInputs } from "../../pages/admin/article";
+import { ArticleInputs } from "./createOrEditArticle";
 import { Status } from "../../types/status";
 import { Article, ArticleShort, ArticlesShortRes } from "./articleTypes";
 
@@ -9,6 +9,7 @@ type ArticlesState = {
   myArticles: ArticleShort[];
   article: Article | null;
   uploadedArticle: Article | null;
+  edittedArticle: Article | null;
   status: Status;
 };
 
@@ -17,6 +18,7 @@ const initialState: ArticlesState = {
   myArticles: [],
   article: null,
   uploadedArticle: null,
+  edittedArticle: null,
   status: Status.Idle,
 };
 
@@ -37,6 +39,11 @@ export const fetchArticle = createAsyncThunk("article/fetchArticle", async (id: 
 
 export const postArticle = createAsyncThunk("article/postArticle", async (data: ArticleInputs) => {
   const response = await axios.post<Article>("/articles", data);
+  return response.data;
+});
+
+export const editArticle = createAsyncThunk("article/editArticle", async (data: ArticleInputs) => {
+  const response = await axios.patch<Article>(`/articles/${data.id}`, data);
   return response.data;
 });
 
@@ -87,6 +94,17 @@ export const articlesSlice = createSlice({
         state.uploadedArticle = action.payload;
       })
       .addCase(postArticle.rejected, (state, action) => {
+        state.status = Status.Fail;
+      })
+
+      .addCase(editArticle.pending, (state, action) => {
+        state.status = Status.Loading;
+      })
+      .addCase(editArticle.fulfilled, (state, action) => {
+        state.status = Status.Success;
+        state.edittedArticle = action.payload;
+      })
+      .addCase(editArticle.rejected, (state, action) => {
         state.status = Status.Fail;
       });
   },
