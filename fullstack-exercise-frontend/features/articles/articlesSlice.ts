@@ -47,6 +47,11 @@ export const editArticle = createAsyncThunk("article/editArticle", async (data: 
   return response.data;
 });
 
+export const deleteArticle = createAsyncThunk("article/deleteArticle", async (id: number) => {
+  const response = await axios.delete<Article>(`/articles/${id}`);
+  return response.data;
+});
+
 export const articlesSlice = createSlice({
   name: "articles",
   initialState,
@@ -105,6 +110,16 @@ export const articlesSlice = createSlice({
         state.edittedArticle = action.payload;
       })
       .addCase(editArticle.rejected, (state, action) => {
+        state.status = Status.Fail;
+      })
+
+      .addCase(deleteArticle.pending, (state, action) => {
+        state.status = Status.Loading;
+      })
+      .addCase(deleteArticle.fulfilled, (state, action) => {
+        state.status = Status.Success;
+      })
+      .addCase(deleteArticle.rejected, (state, action) => {
         state.status = Status.Fail;
       });
   },
