@@ -8,7 +8,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { ApiCookieAuth, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import {
   ArticleApiResShort,
@@ -26,7 +26,7 @@ export class ArticlesController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @ApiCookieAuth('access-token')
   @ApiResponse({ status: 201, type: ArticleApiResShort })
   create(@Body() articleInput: CreateArticleDto) {
     return this.articlesService.create(articleInput);
@@ -38,6 +38,14 @@ export class ArticlesController {
     return this.articlesService.findAll();
   }
 
+  @Get('admin')
+  @UseGuards(JwtAuthGuard)
+  @ApiCookieAuth('access-token')
+  @ApiResponse({ status: 200, type: ArticlesShortRes })
+  findAdmin(): Promise<ArticlesShortRes | null> {
+    return this.articlesService.findUsersArticles();
+  }
+
   @Get(':id')
   @ApiResponse({ status: 200, type: Article })
   @ApiResponse({ status: 404, description: ArticlesErrorDescriptions.NotFound })
@@ -47,7 +55,7 @@ export class ArticlesController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @ApiCookieAuth('access-token')
   @ApiResponse({ status: 200, type: ArticleApiResShort })
   @ApiResponse({
     status: 401,
@@ -61,7 +69,7 @@ export class ArticlesController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @ApiResponse({ status: 200, type: ArticleApiResShort })
-  @ApiBearerAuth()
+  @ApiCookieAuth('access-token')
   @ApiResponse({
     status: 401,
     description: ArticlesErrorDescriptions.UnauthorizedDelete,

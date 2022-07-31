@@ -29,9 +29,11 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Fullstack-exercise')
-    .setDescription('The fullstack-exercise API description')
+    .setDescription(
+      'The fullstack-exercise API description. Please login to access protected routes, which will return an http-only access-token cookie.',
+    )
     .setVersion('1.0')
-    .addBearerAuth()
+    .addCookieAuth('access-token')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

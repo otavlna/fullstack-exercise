@@ -50,15 +50,15 @@ export class ArticlesService {
       relations: { comments: true, user: true },
     });
 
-    return new ArticlesShortRes({
-      articles: articles,
-    });
+    return new ArticlesShortRes({ articles: articles });
   }
 
-  async findUsersArticles(): Promise<Article[] | null> {
-    return await this.articlesRepository.findBy({
+  async findUsersArticles(): Promise<ArticlesShortRes | null> {
+    const articles = await this.articlesRepository.findBy({
       userId: this.request.user.id,
     });
+
+    return new ArticlesShortRes({ articles: articles });
   }
 
   async update(

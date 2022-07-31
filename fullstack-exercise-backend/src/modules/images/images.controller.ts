@@ -6,7 +6,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { ApiCookieAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { Express } from 'express';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import multerOptions from './multerOptions';
@@ -19,7 +19,7 @@ export class ImagesController {
   @Post('upload')
   @ApiConsumes('multipart/form-data')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @ApiCookieAuth('access-token')
   @ApiBody({
     description: 'Image upload endpoint',
     type: FileUploadDto,
