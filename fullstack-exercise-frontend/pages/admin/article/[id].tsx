@@ -28,7 +28,6 @@ const EditArticle: FunctionComponent = () => {
   useEffect(() => {
     if (edittedArticle && articleUploadStatus === Status.Success) {
       router.push(`/article/${edittedArticle.id}`);
-      console.log(true);
     }
   }, [edittedArticle, articleUploadStatus, router]);
 
