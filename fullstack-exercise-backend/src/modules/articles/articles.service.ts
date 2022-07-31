@@ -54,8 +54,11 @@ export class ArticlesService {
   }
 
   async findUsersArticles(): Promise<ArticlesShortRes | null> {
-    const articles = await this.articlesRepository.findBy({
-      userId: this.request.user.id,
+    const articles = await this.articlesRepository.find({
+      where: {
+        userId: this.request.user.id,
+      },
+      relations: { comments: true, user: true },
     });
 
     return new ArticlesShortRes({ articles: articles });
