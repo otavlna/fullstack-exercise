@@ -12,8 +12,12 @@
       "address": "localhost",
       "sourceMaps": true,
       "localRoot": "${workspaceFolder}/fullstack-exercise-backend",
-      "remoteRoot": "/app",
-      "restart": true
+      "remoteRoot": "/usr/src/app",
+      "restart": true,
+      "outFiles": [
+        "${workspaceFolder}/**/*.js",
+        "!**/node_modules/**"
+      ]
     }
   ]
 }
