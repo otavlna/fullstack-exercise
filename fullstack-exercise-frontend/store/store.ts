@@ -3,6 +3,7 @@ import notificationsReducer from "../features/notifications/notificationsSlice";
 import articlesReducer from "../features/articles/articlesSlice";
 import fileUploadReducer from "../features/articles/fileUploadSlice";
 import authReducer from "../features/auth/authSlice";
+import commentsReducer from "../features/comments/commentsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     articles: articlesReducer,
     fileUpload: fileUploadReducer,
     auth: authReducer,
+    comments: commentsReducer,
   },
 });
 
