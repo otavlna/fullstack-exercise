@@ -1,17 +1,20 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Scope } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Article } from '../articles/articles.entity';
+import { UserFromRequestDto } from '../users/users.dto';
 import { CreateCommentDto } from './comments.dto';
 import { Comment } from './comments.entity';
 
-@Injectable()
+@Injectable({ scope: Scope.REQUEST })
 export class CommentsService {
   constructor(
     @InjectRepository(Comment)
     private commentRepository: Repository<Comment>,
     @InjectRepository(Article)
     private articleRepository: Repository<Article>,
+    @Inject(REQUEST) private request: Request & { user: UserFromRequestDto },
   ) {}
 
   async create(
@@ -31,7 +34,10 @@ export class CommentsService {
       throw new BadRequestException('Invalid article ID');
     }
 
-    const comment = this.commentRepository.create(commentInput);
+    const comment = this.commentRepository.create({
+      ...commentInput,
+      author: this.request.user.username,
+    });
 
     article.comments.push(comment);
 
