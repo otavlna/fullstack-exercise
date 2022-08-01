@@ -11,3 +11,5 @@
 - I only implemented REST API, because GraphQL wouldn't bring many benefits with an API of this small size. If I were to implement GraphQL as well, I would configure @nestjs/graphql with @nestjs/apollo driver and use code the first approach, as defined in Nest.js docs. For larger apps that often need data pagination/filtering/sorting, I would use the Nestjs-query library which does just that. 
 
 ## Frontend
+
+- Delete selected articles function in admin list view deletes articles by sending one http request per article. In a real app there should be a new endpoint for bulk delete.
