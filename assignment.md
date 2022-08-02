@@ -130,7 +130,7 @@
 
   - ~~implement login~~
   - ~~after successful login redirect to next screen~~
-  - on unsuccesful login display error message
+  - ~~on unsuccesful login display error message~~
 
 - My Article List [My Article List Wireframe](https://www.figma.com/proto/VagZOrr3TjTAxGCpCUTSrO/Applifting-%7C-Full-Stack-Cvi%C4%8Den%C3%AD?node-id=9%3A0&scaling=min-zoom)
 
