@@ -19,7 +19,6 @@ export class AuthController {
     const loginResponse = await this.authService.login(req.user);
     res.cookie('access-token', loginResponse.access_token, {
       httpOnly: true,
-      secure: true,
     });
     res.cookie('logged-in', true);
   }
@@ -29,7 +28,7 @@ export class AuthController {
     description: 'Logout endpoint',
   })
   async logout(@Res({ passthrough: true }) res: Response) {
-    res.clearCookie('access-token', { httpOnly: true, secure: true });
+    res.clearCookie('access-token', { httpOnly: true });
     res.clearCookie('logged-in');
   }
 }
