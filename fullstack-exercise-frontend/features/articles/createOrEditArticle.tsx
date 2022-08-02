@@ -22,6 +22,7 @@ export type ArticleInputs = {
 };
 
 const CreateOrEditArticle: FunctionComponent<CreateOrEditArticleProps> = ({ mode, article, onSubmit }) => {
+  const [didClickSend, setDidClickSend] = useState(false);
   const { fileName, status: fileUploadStatus } = useAppSelector((state) => state.fileUpload);
   const dispatch = useAppDispatch();
 
@@ -94,7 +95,7 @@ const CreateOrEditArticle: FunctionComponent<CreateOrEditArticleProps> = ({ mode
     <form className="row" onSubmit={handleSubmit(onFormSubmit)}>
       <div className="d-flex align-items-center mb-3">
         <h1 className="mb-0 me-3">{mode === "create" ? "Create new article" : "Edit article"}</h1>
-        <Button type="submit">Publish Article</Button>
+        <Button type="submit" onClick={() => setDidClickSend(true)}>Publish Article</Button>
       </div>
 
       <div className="col-6">
@@ -104,10 +105,14 @@ const CreateOrEditArticle: FunctionComponent<CreateOrEditArticleProps> = ({ mode
         <input
           id="title"
           className="w-100 p-1 border rounded"
-          {...register("title", { required: true })}
+          {...register("title", {
+            required: "Required",
+            minLength: { value: 10, message: "Min 10 characters" },
+            maxLength: { value: 60, message: "Max 60 characters" },
+          })}
           placeholder="My First Article"
         />
-        {!!errors.title?.message ?? <p className="text-danger">{errors.title?.message}</p>}
+        {errors.title && <p className="text-danger">{errors.title?.message}</p>}
       </div>
       <div className="col-6"></div>
 
@@ -120,6 +125,7 @@ const CreateOrEditArticle: FunctionComponent<CreateOrEditArticleProps> = ({ mode
           Upload an Image
         </label>
         {previewImage}
+        {!fileName && didClickSend && <p className="text-danger">File missing</p>}
       </div>
 
       <div className="col-6">
@@ -130,10 +136,14 @@ const CreateOrEditArticle: FunctionComponent<CreateOrEditArticleProps> = ({ mode
           rows={3}
           id="perex"
           className="w-100 p-1 border rounded"
-          {...register("perex", { required: true })}
+          {...register("perex", {
+            required: "Required",
+            minLength: { value: 10, message: "Min 10 characters" },
+            maxLength: { value: 300, message: "Max 300 characters" },
+          })}
           placeholder="Supports Markdown"
         ></textarea>
-        {!!errors.content?.message ?? <p className="text-danger">{errors.content?.message}</p>}
+        {errors.perex && <p className="text-danger">{errors.perex?.message}</p>}
       </div>
       <div className="col-6 mt-3">
         <ReactMarkdown className="">{watch("perex")}</ReactMarkdown>
@@ -147,10 +157,14 @@ const CreateOrEditArticle: FunctionComponent<CreateOrEditArticleProps> = ({ mode
           rows={15}
           id="title"
           className="w-100 p-1 border rounded"
-          {...register("content", { required: true })}
+          {...register("content", {
+            required: "Required",
+            minLength: { value: 10, message: "Min 10 characters" },
+            maxLength: { value: 5000, message: "Max 5000 characters" },
+          })}
           placeholder="Supports Markdown"
         ></textarea>
-        {!!errors.content?.message ?? <p className="text-danger">{errors.content?.message}</p>}
+        {errors.content && <p className="text-danger">{errors.content?.message}</p>}
       </div>
       <div className="col-6 mt-3 overflow-auto">
         <ReactMarkdown className="">{watch("content")}</ReactMarkdown>

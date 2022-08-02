@@ -3,7 +3,6 @@ import { FunctionComponent, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { login } from "../../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { Status } from "../../types/status";
 
 export type LoginInputs = {
   username: string;
@@ -18,11 +17,13 @@ const Login: FunctionComponent = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
-  } = useForm<LoginInputs>();
+    formState: { errors, isValid },
+  } = useForm<LoginInputs>({ mode: "onChange" });
 
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
-    dispatch(login(data));
+    if (isValid) {
+      dispatch(login(data));
+    }
   };
 
   useEffect(() => {
@@ -41,10 +42,14 @@ const Login: FunctionComponent = () => {
         <input
           id="username"
           className="w-100 p-1 border rounded"
-          {...register("username", { required: true })}
+          {...register("username", {
+            required: "Required",
+            minLength: { value: 3, message: "Min 3 characters" },
+            maxLength: { value: 50, message: "Max 50 characters" },
+          })}
           placeholder="admin"
         />
-        {!!errors.username?.message ?? <p className="text-danger">{errors.username?.message}</p>}
+        {errors.username && <p className="text-danger">{errors.username?.message}</p>}
         <label htmlFor="password" className="d-block mb-1 mt-2">
           Password
         </label>
@@ -52,10 +57,14 @@ const Login: FunctionComponent = () => {
           id="password"
           type="password"
           className="w-100 p-1 border rounded"
-          {...register("password", { required: true })}
+          {...register("password", {
+            required: "Required",
+            minLength: { value: 8, message: "Min 8 characters" },
+            maxLength: { value: 256, message: "Max 256 characters" },
+          })}
           placeholder="********"
         />
-        {!!errors.password?.message ?? <p className="text-danger">{errors.password?.message}</p>}
+        {errors.password && <p className="text-danger">{errors.password?.message}</p>}
         <div className="mt-3 d-flex justify-content-end">
           <button className="btn btn-primary" type="submit">
             Log In
