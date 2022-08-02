@@ -97,53 +97,53 @@
 
 - Article List [Article List Wireframe](https://www.figma.com/file/VagZOrr3TjTAxGCpCUTSrO/Applifting-Full-Stack-Cvi%C4%8Den%C3%AD?node-id=2%3A3)
 
-  - display a list of all articles, ordered by date descending
-  - each article should show title, perex and publication date
-  - each article should have a link to the full text
+  - ~~display a list of all articles, ordered by date descending~~
+  - ~~each article should show title, perex and publication date~~
+  - ~~each article should have a link to the full text~~
 
 - Article View [Article View Wireframe](https://www.figma.com/file/VagZOrr3TjTAxGCpCUTSrO/Applifting-Full-Stack-Cvi%C4%8Den%C3%AD?node-id=2%3A75)
 
-  - display an article
-  - article should be in markdown, take care of proper rendering
+  - ~~display an article~~
+  - ~~article should be in markdown, take care of proper rendering~~
 
 - New Article View [New Article View Wireframe](https://www.figma.com/file/VagZOrr3TjTAxGCpCUTSrO/Applifting-Full-Stack-Cvi%C4%8Den%C3%AD?node-id=14%3A2255)
 
-  - display a page with form to add new article
-  - the form should take title, perex and content
-  - the content should be in markdown, you can use some existing markdown editor
-  - add necessary validations
-  - this page should be protected by password
+  - ~~display a page with form to add new article~~
+  - ~~the form should take title, perex and content~~
+  - ~~the content should be in markdown, you can use some existing markdown editor~~
+  - ~~add necessary validations~~
+  - ~~this page should be protected by password~~
 
-- Add Comment functionality
-- display comments on Article View page
-- each comment should have content, timestamp and author
-- add comment form to Article View page
-- comment form should take author and content
+- ~~Add Comment functionality~~
+- ~~display comments on Article View page~~
+- ~~each comment should have content, timestamp and author~~
+- ~~add comment form to Article View page~~
+- ~~comment form should take author and content~~
 
-- Add Comment voting functionality
-  - add the ability to vote on comments (+/-)
-  - display score on each comment
+- ~~Add Comment voting functionality~~
+  - ~~add the ability to vote on comments (+/-)~~
+  - ~~display score on each comment~~
 
 ### Admin Perspective
 
 - Login Screen [Login Screen Wireframe](https://www.figma.com/proto/VagZOrr3TjTAxGCpCUTSrO/Applifting-%7C-Full-Stack-Cvi%C4%8Den%C3%AD?node-id=14%3A2693&scaling=min-zoom)
 
-  - implement login
-  - after successful login redirect to next screen
+  - ~~implement login~~
+  - ~~after successful login redirect to next screen~~
   - on unsuccesful login display error message
 
 - My Article List [My Article List Wireframe](https://www.figma.com/proto/VagZOrr3TjTAxGCpCUTSrO/Applifting-%7C-Full-Stack-Cvi%C4%8Den%C3%AD?node-id=9%3A0&scaling=min-zoom)
 
-  - display table of all articles
-  - display a button to create new article
-  - implement edit and delete buttons
+  - ~~display table of all articles~~
+  - ~~display a button to create new article~~
+  - ~~implement edit and delete buttons~~
   - optionally implement article ordering
 
 - Article Detail View [Article Detail Wireframe](https://www.figma.com/proto/VagZOrr3TjTAxGCpCUTSrO/Applifting-%7C-Full-Stack-Cvi%C4%8Den%C3%AD?node-id=14%3A2622&scaling=min-zoom)
 
-  - display editable sections of article
-  - implement publish button
-  - use some existing Markdown editor, unless you really want to implement your own
+  - ~~display editable sections of article~~
+  - ~~implement publish button~~
+  - ~~use some existing Markdown editor, unless you really want to implement your own~~
 
 ## Multitenancy and accessing the API
 
