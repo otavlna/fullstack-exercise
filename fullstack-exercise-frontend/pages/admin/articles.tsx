@@ -95,6 +95,7 @@ const AdminArticles: FunctionComponent = () => {
           await Promise.allSettled(promises);
           setShowDeleteSelectedModal(false);
           dispatch(fetchMyArticles());
+          setSelectedArticleIds([]);
         }}
         onCancel={() => {
           setShowDeleteSelectedModal(false);

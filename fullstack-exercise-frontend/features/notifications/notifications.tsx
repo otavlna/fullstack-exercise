@@ -21,7 +21,7 @@ const Notifications: FunctionComponent<NotificationsProps> = () => {
           delay={5000}
           autohide
         >
-          <Toast.Body>{notification.content}</Toast.Body>
+          <Toast.Body style={{ color: "white" }}>{notification.content}</Toast.Body>
         </Toast>
       ))}
     </ToastContainer>

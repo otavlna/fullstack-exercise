@@ -3,6 +3,9 @@ import axios from "../../common/axios";
 import { LoginInputs } from "../../pages/admin/login";
 import { Status } from "../../types/status";
 import { getCookie } from "cookies-next";
+import { addNotification, createNotification } from "../notifications/notificationsSlice";
+import { AxiosError, AxiosResponse } from "axios";
+import { ErrorData } from "../../types/errorData";
 
 type AuthState = {
   loggedIn: boolean;
@@ -18,9 +21,17 @@ const initialState: AuthState = {
   status: Status.Idle,
 };
 
-export const login = createAsyncThunk("auth/login", async (data: LoginInputs) => {
-  const response = await axios.post("/auth/login", data);
-  return response.data;
+export const login = createAsyncThunk("auth/login", async (data: LoginInputs, { dispatch }) => {
+  await axios
+    .post<null, AxiosResponse<ErrorData>>("/auth/login", data)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err: AxiosError<ErrorData>) => {
+      dispatch(
+        addNotification(createNotification(err.response?.data.message ?? "", err.response?.status ?? 400))
+      );
+    });
 });
 
 export const logout = createAsyncThunk("auth/logout", async () => {

@@ -4,6 +4,9 @@ import { ArticleInputs } from "./createOrEditArticle";
 import { Status } from "../../types/status";
 import { Article, ArticleShort, ArticlesShortRes } from "./articleTypes";
 import { VoteNew, VoteRes, VoteTypes } from "../comments/commentTypes";
+import { AxiosError, AxiosResponse } from "axios";
+import { ErrorData } from "../../types/errorData";
+import { addNotification, createNotification } from "../notifications/notificationsSlice";
 
 type ArticlesState = {
   articles: ArticleShort[];
@@ -23,9 +26,15 @@ const initialState: ArticlesState = {
   status: Status.Idle,
 };
 
-export const fetchArticles = createAsyncThunk("articles/fetchArticles", async () => {
-  const response = await axios.get<ArticlesShortRes>("/articles");
-  return response.data;
+export const fetchArticles = createAsyncThunk("articles/fetchArticles", async (_, { dispatch }) => {
+  try {
+    const response = await axios.get<ArticlesShortRes>("/articles");
+    return response.data;
+  } catch (err: any) {
+    dispatch(
+      addNotification(createNotification(err.response?.data.message ?? "", err.response?.status ?? 400))
+    );
+  }
 });
 
 export const fetchMyArticles = createAsyncThunk("articles/fetchMyArticles", async () => {
@@ -48,9 +57,18 @@ export const editArticle = createAsyncThunk("article/editArticle", async (data: 
   return response.data;
 });
 
-export const deleteArticle = createAsyncThunk("article/deleteArticle", async (id: number) => {
-  const response = await axios.delete<Article>(`/articles/${id}`);
-  return response.data;
+export const deleteArticle = createAsyncThunk("article/deleteArticle", async (id: number, { dispatch }) => {
+  await axios
+    .delete<Article>(`/articles/${id}`)
+    .then((res) => {
+      dispatch(addNotification(createNotification("Article deleted successfully", res.status ?? 400)));
+      return res.data;
+    })
+    .catch((err: AxiosError<ErrorData>) => {
+      dispatch(
+        addNotification(createNotification(err.response?.data.message ?? "", err.response?.status ?? 400))
+      );
+    });
 });
 
 export const articlesSlice = createSlice({
@@ -71,7 +89,9 @@ export const articlesSlice = createSlice({
       })
       .addCase(fetchArticles.fulfilled, (state, action) => {
         state.status = Status.Success;
-        state.articles = action.payload.articles;
+        if (action && action.payload) {
+          state.articles = action.payload.articles;
+        }
       })
       .addCase(fetchArticles.rejected, (state, action) => {
         state.status = Status.Fail;
