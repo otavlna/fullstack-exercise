@@ -15,9 +15,10 @@ export class UsersService implements OnModuleInit {
   ) {}
 
   async onModuleInit(): Promise<void> {
-    if (this.configService.get('NODE_ENV') === 'development') {
-      await this.seedDatabase();
-    }
+    // if (this.configService.get('NODE_ENV') === 'development') {
+    //   await this.seedDatabase();
+    // }
+    await this.seedDatabase();
   }
 
   async findOne(username: string): Promise<User | null> {

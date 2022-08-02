@@ -56,7 +56,7 @@ The API documentation is available after app startup at [localhost:1337/api](loc
 
 ### Protected endpoints
 
-Generate access token on /auth/login using one of the two development-mode-only preseeded identities:
+Generate access token on /auth/login using one of the two preseeded identities:
 
 ```
 {
