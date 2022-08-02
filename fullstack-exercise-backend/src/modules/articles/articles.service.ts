@@ -48,6 +48,7 @@ export class ArticlesService {
   async findAll(): Promise<ArticlesShortRes | null> {
     const articles = await this.articlesRepository.find({
       relations: { comments: true, user: true },
+      order: { createdAt: 'DESC' },
     });
 
     return new ArticlesShortRes({ articles: articles });
@@ -59,6 +60,7 @@ export class ArticlesService {
         userId: this.request.user.id,
       },
       relations: { comments: true, user: true },
+      order: { createdAt: 'DESC' },
     });
 
     return new ArticlesShortRes({ articles: articles });
