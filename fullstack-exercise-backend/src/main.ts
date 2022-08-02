@@ -38,7 +38,14 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  app.enableCors({ origin: ['http://localhost:3000'], credentials: true });
+  app.enableCors({
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:443',
+      'https://sudety.ch',
+    ],
+    credentials: true,
+  });
 
   await app.listen(1337);
 }
