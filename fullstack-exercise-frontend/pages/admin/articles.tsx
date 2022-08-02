@@ -46,7 +46,7 @@ const AdminArticles: FunctionComponent = () => {
           <td>{article.comments}</td>
           <td>
             <div className="d-flex">
-              <Link href={`/article/${article.id}`}>
+              <Link href={`/admin/article/${article.id}`}>
                 <Edit2 style={{ cursor: "pointer" }} />
               </Link>
               <Trash
