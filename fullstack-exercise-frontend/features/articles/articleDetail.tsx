@@ -3,7 +3,7 @@ import { FunctionComponent, useState } from "react";
 import { formatDate } from "../../common/formatDate";
 import { Article } from "./articleTypes";
 import ReactMarkdown from "react-markdown";
-import Comments from "./comments";
+import Comments from "../comments/comments";
 import ArticleDetailAside from "./articleDetailAside";
 
 interface ArticleDetailProps {

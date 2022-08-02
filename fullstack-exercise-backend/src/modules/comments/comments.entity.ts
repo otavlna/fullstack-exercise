@@ -1,4 +1,5 @@
 import { ApiHideProperty } from '@nestjs/swagger';
+import { Exclude, Expose } from 'class-transformer';
 import {
   Entity,
   Column,
@@ -29,6 +30,12 @@ export class Comment {
   article!: Article;
 
   @ApiHideProperty()
-  @OneToMany(() => Vote, (vote) => vote.comment)
+  @Exclude()
+  @OneToMany(() => Vote, (vote) => vote.comment, { eager: true })
   votes!: Vote[];
+
+  @Expose()
+  get score(): number | undefined {
+    return this.votes?.reduce((a: number, b: Vote) => a + b.type, 0);
+  }
 }

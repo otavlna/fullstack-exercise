@@ -1,6 +1,4 @@
-import { Exclude, Expose } from 'class-transformer';
 import { IsEnum, IsNumber } from 'class-validator';
-import { Comment } from '../comments/comments.entity';
 import { VoteTypes } from './votes.entity';
 
 export class CreateVoteDto {
@@ -12,15 +10,10 @@ export class CreateVoteDto {
 }
 
 export class ResponseVoteDto {
-  @Exclude()
-  ip!: number;
+  constructor(partial: Partial<ResponseVoteDto>) {
+    Object.assign(this, partial);
+  }
 
-  @Expose()
-  type!: VoteTypes;
-
-  @Expose()
-  id!: number;
-
-  @Expose()
-  comment!: Comment;
+  score!: number;
+  commentId!: number;
 }

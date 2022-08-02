@@ -2,10 +2,12 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Status } from "../../types/status";
-import { postComment, refetched } from "../comments/commentsSlice";
-import { fetchArticle } from "./articlesSlice";
-import { Article } from "./articleTypes";
+import { postComment, refetched } from "./commentsSlice";
+import { addVote, fetchArticle } from "../articles/articlesSlice";
+import { Article } from "../articles/articleTypes";
 import Comment from "./comment";
+import { io, Socket } from "socket.io-client";
+import { VoteNew, VoteRes, VoteTypes } from "./commentTypes";
 
 interface CommentsProps {
   article: Article;
@@ -39,6 +41,29 @@ const Comments: FunctionComponent<CommentsProps> = ({ article }) => {
     }
   }, [status, needsRefetch, article, reset, dispatch]);
 
+  const [connected, setConnected] = useState<boolean>(false);
+  const [socket, setSocket] = useState<null | Socket>(null);
+  useEffect((): any => {
+    const url = process.env.NEXT_PUBLIC_API_BASE_URL as string;
+    const socket = io(url);
+    setSocket(socket);
+    socket.on("connect", () => {
+      setConnected(true);
+    });
+
+    socket.on("newVote", (vote: VoteRes) => {
+      dispatch(addVote(vote));
+    });
+
+    if (socket) return () => socket.disconnect();
+  }, [dispatch]);
+
+  function onVote(vote: VoteNew) {
+    socket?.emit("newVote", vote, (vote: VoteRes) => {
+      dispatch(addVote(vote));
+    });
+  }
+
   return (
     <div>
       <h4>Comments ({article.comments.length})</h4>
@@ -59,7 +84,7 @@ const Comments: FunctionComponent<CommentsProps> = ({ article }) => {
         </div>
       </form>
       {article.comments.map((comment) => {
-        return <Comment comment={comment} key={comment.id} />;
+        return <Comment comment={comment} key={comment.id} onVote={onVote} />;
       })}
     </div>
   );

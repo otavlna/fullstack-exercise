@@ -1,8 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "../../common/axios";
 import { ArticleInputs } from "./createOrEditArticle";
 import { Status } from "../../types/status";
 import { Article, ArticleShort, ArticlesShortRes } from "./articleTypes";
+import { VoteNew, VoteRes, VoteTypes } from "../comments/commentTypes";
 
 type ArticlesState = {
   articles: ArticleShort[];
@@ -55,7 +56,14 @@ export const deleteArticle = createAsyncThunk("article/deleteArticle", async (id
 export const articlesSlice = createSlice({
   name: "articles",
   initialState,
-  reducers: {},
+  reducers: {
+    addVote: (state, action: PayloadAction<VoteRes>) => {
+      const comment = state.article?.comments.find((comment) => comment.id === action.payload.commentId);
+      if (comment) {
+        comment.score = action.payload.score;
+      }
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchArticles.pending, (state, action) => {
@@ -125,6 +133,6 @@ export const articlesSlice = createSlice({
   },
 });
 
-// export const {} = articlesSlice.actions;
+export const { addVote } = articlesSlice.actions;
 
 export default articlesSlice.reducer;

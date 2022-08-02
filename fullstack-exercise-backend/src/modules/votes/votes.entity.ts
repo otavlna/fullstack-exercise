@@ -10,8 +10,8 @@ import {
 import { Comment } from '../comments/comments.entity';
 
 export enum VoteTypes {
-  Upvote = 'UPVOTE',
-  Downvote = 'DOWNVOTE',
+  Upvote = 1,
+  Downvote = -1,
 }
 
 @Entity()

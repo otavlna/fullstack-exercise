@@ -82,4 +82,10 @@ export class VotesService {
       return voteProper;
     }
   }
+
+  async getScore(commentId: number): Promise<number | undefined> {
+    const comment = await this.commentsRepository.findOneBy({ id: commentId });
+    const votes = comment?.votes.map((vote) => vote.type);
+    return votes?.reduce((a, b) => a + b, 0);
+  }
 }

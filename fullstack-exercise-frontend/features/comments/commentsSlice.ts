@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../common/axios";
 import { Status } from "../../types/status";
-import { CommentInputs } from "../articles/comments";
+import { CommentInputs } from "./comments";
 
 type CommentsState = {
   status: Status;
