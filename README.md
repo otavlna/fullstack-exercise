@@ -4,8 +4,6 @@ This monorepo contains two main directories - the app's [frontend](https://githu
 
 You can find more info in respective directories.
 
-Currently only backend is implemented.
-
 ### Relevant links
 
 - [**Solution Notes**](https://github.com/otavlna/fullstack-exercise/blob/master/solution.md)
