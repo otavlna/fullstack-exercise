@@ -121,7 +121,7 @@ const CreateOrEditArticle: FunctionComponent<CreateOrEditArticleProps> = ({ mode
           Featured image
         </label>
         <label htmlFor="file" className="btn btn-secondary">
-          <input type="file" id="file" className="my-2" onChange={uploadFile} hidden />
+          <input type="file" id="file" className="my-2" onChange={uploadFile} hidden accept="image/*" />
           Upload an Image
         </label>
         {previewImage}
