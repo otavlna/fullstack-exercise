@@ -42,7 +42,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:3000',
       'http://localhost:443',
-      'https://sudety.ch',
+      'https://sudety.ch:3000',
     ],
     credentials: true,
   });
