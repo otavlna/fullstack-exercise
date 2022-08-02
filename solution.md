@@ -14,3 +14,4 @@
 ## Frontend
 
 - Delete selected articles function in admin list view deletes articles by sending one http request per article. In a real app there should be a new endpoint for bulk delete.
+- Data is loaded client-side, but on a real blog it would be better to use SSR to improve SEO.
