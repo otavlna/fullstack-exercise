@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../common/axios";
 import { Status } from "../../types/status";
+import { addNotification, createNotification } from "../notifications/notificationsSlice";
 import { CommentInputs } from "./comments";
 
 type CommentsState = {
@@ -13,9 +14,15 @@ const initialState: CommentsState = {
   needsRefetch: false,
 };
 
-export const postComment = createAsyncThunk("comment/post", async (data: CommentInputs) => {
-  const response = await axios.post<Comment>(`articles/${data.articleId}/comments/`, data);
-  return response.data;
+export const postComment = createAsyncThunk("comment/post", async (data: CommentInputs, { dispatch }) => {
+  try {
+    const response = await axios.post<Comment>(`articles/${data.articleId}/comments/`, data);
+    return response.data;
+  } catch (err: any) {
+    dispatch(
+      addNotification(createNotification(err.response?.data.message ?? "", err.response?.status ?? 400))
+    );
+  }
 });
 
 export const commentsSlice = createSlice({
